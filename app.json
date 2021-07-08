@@ -1,0 +1,51 @@
+{
+  "addons": [
+    "heroku-postgresql",
+    "scheduler"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-php.git"
+    }
+  ],
+  "env": {
+    "APP_DEBUG": {
+      "value": "true"
+    },
+    "APP_ENV": {
+      "value": "local"
+    },
+    "APP_KEY": {
+      "required": true
+    },
+    "APP_URL": {
+      "value": "https://${HEROKU_APP_NAME}.herokuapp.com"
+    },
+    "SANCTUM_STATEFUL_DOMAINS": {
+      "value": "${HEROKU_APP_NAME}.herokuapp.com"
+    },
+    "SESSION_DOMAIN": {
+      "value": "${HEROKU_APP_NAME}.herokuapp.com"
+    },
+
+    "LOG_CHANNEL": {
+      "value": "stderr"
+    },
+    "NODE_ENV": {
+      "value": "development"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "mathieutu-compta",
+  "scripts": {
+    "postdeploy": "php artisan reset:app"
+  },
+  "stack": "heroku-20"
+}
